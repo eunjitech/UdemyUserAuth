@@ -1,6 +1,6 @@
 //로그인한 사용자 정보 관리
-
-import { createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext({
   token: "",
@@ -14,10 +14,12 @@ export default function AuthContextProvider({ children }) {
 
   function authenticate(token) {
     setAuthToken(token);
+    AsyncStorage.setItem("token", token); //두번째 인자는 string값으로 저장
   } //로그인 성공할 때 사용되는 트리거함수
 
   function logout() {
     setAuthToken(null);
+    AsyncStorage.removeItem("token");
   }
 
   const value = {
