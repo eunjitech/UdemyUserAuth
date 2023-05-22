@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AuthContent from "../components/Auth/AuthContent";
 import { createUser } from "../utils/auth";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
@@ -17,8 +17,8 @@ function SignupScreen() {
       authCtx.authenticate(token);
     } catch (error) {
       Alert.alert("Authentication failed", "다시 확인해봐라");
+      setIsAuthenticating(false);
     }
-    setIsAuthenticating(false);
   }
 
   if (isAuthenticating) {
